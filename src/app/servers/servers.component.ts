@@ -10,6 +10,11 @@ export class ServersComponent implements OnInit {
   serverCreationStatus = "No server was created!";
   serverName = "Test server";
   username = "";
+  serverCreated = false;
+  servers = ["Testserver", "Testserver 2"];
+  showParagraph = false;
+  buttonClicks = 0;
+  clickArray = [];
 
   constructor() {
     setTimeout(() => {
@@ -20,6 +25,8 @@ export class ServersComponent implements OnInit {
   ngOnInit(): void {}
 
   onCreateServer() {
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus =
       "Server was created! Name is " + this.serverName;
   }
@@ -36,5 +43,16 @@ export class ServersComponent implements OnInit {
 
   resetUsername() {
     this.username = "";
+  }
+
+  toggleParagraph() {
+    this.showParagraph = !this.showParagraph;
+    this.buttonClicks++;
+    this.clickArray.push(this.buttonClicks);
+    console.log(this.clickArray);
+  }
+
+  getColor(click) {
+    return click > 4 ? "blue" : "white";
   }
 }
